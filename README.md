@@ -40,11 +40,13 @@ Simple JavaEE web application demonstrating [SAML](http://en.wikipedia.org/wiki/
 
 1. currently the src/main/webapp/idm-metadata.xml and src/main/webapp/idm-metadata.xml files are not being utilized and are included for future reference.
 
-2. This example requires a [few enhancements](https://issues.jboss.org/browse/PLINK-506) to the new Jetty PicketLink binding have been submitted but not accepted at the time of this writing. Be sure to use the latest PicketLink Binding snapshots with the fixes applied. 
+2. Microsoft at the moment supports the SAML HTTP Redirect binding and they are working on support fot the POST binding.
 
-3. The PicketLink SAML SP Jetty Forms Authenticator requires Jetty to be configured with a loginService. Typically the HashLoginService is used. The Authenticator will set the principal name and roles ignoring whatever the loginService provides but it must be configured regardless.  
+3. This example requires a [few enhancements](https://issues.jboss.org/browse/PLINK-506) to the new Jetty PicketLink binding have been submitted but not accepted at the time of this writing. Be sure to use the latest PicketLink Binding snapshots with the fixes applied. 
 
-4. Parsing the IDM metadata to setup SAML via the picketlink.xml file is currently not supported (while the certificate is read from the metadata the SPWorkFlow requires a full blown TrustKeyManager to perform the validation)
+4. The PicketLink SAML SP Jetty Forms Authenticator requires Jetty to be configured with a loginService. Typically the HashLoginService is used. The Authenticator will set the principal name and roles ignoring whatever the loginService provides but it must be configured regardless.  
 
-5. WAAD has it's own entitlements service based on oAuth 2 and as far as I know there is no way to configure WAAD to pass role information in the SAML request. Usually an application will use it's own local role and authorization data anyway. A future enhancement may be to add a SAML Handler to read in role information from a PicketLink IdentityStore or implementing LoginService that also uses the PicketLink IdentityStore. This way WAAD would perform the remote authentication and PicketLink the local authorization.
+5. Parsing the IDM metadata to setup SAML via the picketlink.xml file is currently not supported (while the certificate is read from the metadata the SPWorkFlow requires a full blown TrustKeyManager to perform the validation)
+
+6. WAAD has it's own entitlements service based on oAuth 2 and as far as I know there is no way to configure WAAD to pass role information in the SAML request. Usually an application will use it's own local role and authorization data anyway. A future enhancement may be to add a SAML Handler to read in role information from a PicketLink IdentityStore or implementing LoginService that also uses the PicketLink IdentityStore. This way WAAD would perform the remote authentication and PicketLink the local authorization.
 
