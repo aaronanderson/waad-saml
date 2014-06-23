@@ -14,11 +14,11 @@ Simple JavaEE web application demonstrating [SAML](http://en.wikipedia.org/wiki/
 
 4.  Enter in the application's URL that will be receiving the SAML POST assertion. PicketLink scan's incoming un-authenticated requests for SAML parameters so you may use any URL. For this example the the Jetty web server will be running on the localhost and the assertion will be posted to the base context: https://localhost:8443/waad-saml/
 
-![alt text](https://github.com/aaronanderson/waad-saml/raw/master/src/addApplication.png "Add Application")
+![alt text](https://raw.githubusercontent.com/aaronanderson/waad-saml/master/addApplication.png "Add Application")
 
 5. Select the application and click the Endpoints button at the bottom. Observe the Federation Metadata and SAML-P URLs.
 
-![alt text](https://github.com/aaronanderson/waad-saml/raw/master/src/endpoints.png "Endpoints")
+![alt text](https://raw.githubusercontent.com/aaronanderson/waad-saml/master/endpoints.png "Endpoints")
 
 6. Update the src/main/webapp/WEB-INF/picketlink.xml file's IdentityURL with the SAML-P URL. 
        
