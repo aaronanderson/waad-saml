@@ -1,0 +1,37 @@
+<PicketLink xmlns="urn:picketlink:identity-federation:config:2.1">
+	<PicketLinkSP xmlns="urn:picketlink:identity-federation:config:2.1" BindingType="REDIRECT" ErrorPage="/samlerror.jsp" LogOutPage="/samllogout.jsp" SupportsSignatures="true"> 
+		
+		<!-- parsing the metadata file and using the published certificate is not functional yet. -->
+		<!-- <IDPMetadataFile>/WEB-INF/idp-metadata.xml</IDPMetadataFile> -->
+		<IdentityURL>https://login.windows.net/55555555-5555-5555-5555-555555555555/saml2</IdentityURL>
+		<ServiceURL>https://localhost:8443/waad-saml/</ServiceURL>
+		<Trust>
+		<!-- local server needs to be included since AuthNRequest is also checked -->
+			<Domains>localhost,sts.windows.net</Domains>
+		</Trust>
+		<!--  -->
+		<KeyProvider ClassName="org.picketlink.identity.federation.core.impl.KeyStoreKeyManager">
+			<!-- Note:  KeyStoreKeyManager does not have references to servletcontext so keystoreURL must be filesystem location-->
+			<!-- How to generate keystore:  https://community.jboss.org/wiki/PicketLinkX509CertificatesInSAMLMetadata
+			keytool -import -file src/waad.cer -keystore src/waad_keystore.jks -alias waad-cert -keyPass waad1234 -storePass waad1234 -noprompt -trustcacerts  
+			 -->
+			<Auth Key="KeyStoreURL" Value="src/waad_keystore.jks" />
+			<Auth Key="KeyStorePass" Value="waad1234" />
+			<Auth Key="SigningKeyPass" Value="waad1234" />
+			<Auth Key="SigningKeyAlias" Value="waad-cert" />
+
+			<ValidatingAlias Key="login.windows.net" Value="waad-cert" />
+		</KeyProvider>
+	</PicketLinkSP>
+
+	<Handlers xmlns="urn:picketlink:identity-federation:handler:config:2.1">
+		<Handler class="org.picketlink.identity.federation.web.handlers.saml2.SAML2IssuerTrustHandler" />
+		<Handler class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureValidationHandler"/>
+		<Handler class="org.picketlink.identity.federation.web.handlers.saml2.SAML2AuthenticationHandler">
+			<Option Key="DISABLE_ROLE_PICKING" Value="true" />
+			<Option Key="NAMEID_FORMAT" Value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" />
+			<Option Key="ASSERTION_SESSION_ATTRIBUTE_NAME" Value="org.picketlink.sp.assertion" />
+		</Handler>
+		<Handler class="org.picketlink.identity.federation.web.handlers.saml2.SAML2AttributeHandler" />
+	</Handlers>
+</PicketLink>

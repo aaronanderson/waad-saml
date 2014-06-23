@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Note: I am not 100% sure this is valid -->
+<EntitiesDescriptor Name="urn:mace:shibboleth:testshib:two" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<EntityDescriptor entityID="https://localhost:8443/waad-saml">
+		<SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol http://schemas.xmlsoap.org/ws/2003/07/secext">
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+			<AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://localhost:8443/waad-saml" index="1" isDefault="true" />
+		</SPSSODescriptor>
+		<Organization>
+			<OrganizationName xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xml:lang="en">GIT Hub</OrganizationName>
+			<OrganizationDisplayName xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xml:lang="en">WAAD SAML Test Integrations</OrganizationDisplayName>
+			<OrganizationURL xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xml:lang="en">http://someorg.com</OrganizationURL>
+		</Organization>
+		<ContactPerson contactType="technical">
+			<GivenName>Aaron</GivenName>
+			<SurName>Anderson</SurName>
+			<EmailAddress>aanderson@someURL.com</EmailAddress>
+		</ContactPerson>
+	</EntityDescriptor>
+</EntitiesDescriptor>

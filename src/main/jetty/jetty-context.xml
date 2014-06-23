@@ -1,0 +1,22 @@
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+	<Set name="serverClasses">
+		<Array type="java.lang.String">
+			<Item>-org.eclipse.jetty.servlet.ServletContextHandler.Decorator</Item>
+		</Array>
+	</Set>
+	<Get name="securityHandler">
+		<Set name="loginService">
+			<New class="org.eclipse.jetty.security.HashLoginService">
+				<Set name="name">Test Realm</Set>
+				<Set name="config">src/main/webapp/WEB-INF/realm.properties</Set>
+			</New>
+		</Set>
+		<Set name="authenticator">
+			<New class="org.picketlink.identity.federation.bindings.jetty.sp.SPFormAuthenticator">
+
+			</New>
+		</Set>
+	</Get>
+</Configure>
+
